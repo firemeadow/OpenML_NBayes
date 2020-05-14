@@ -32,6 +32,7 @@ def load_data(dataset):
     for i, col in data.items():
         if np.sum(col.isnull()) > 0:
             if col.dtype.name == 'category':
+                data[i] = data[i].cat.add_categories('Missing')
                 data[i].fillna('Missing')
             else:
                 data[i].fillna(np.median(col))
